@@ -37,7 +37,7 @@ def add_item(request):
 def handle(request, username):
 	username = request.GET['username']
 	user = Account.objects.get(yo_name=str(username))
-	item_to_delete = Item.objects.earliest(user_id=user.id)
+	item_to_delete = Item.objects.filter(user_id=user.id).earliest('date_created')
 	item_to_delete.delete()
 	url = reverse('home')
 	return HttpResponseRedirect(url) 
