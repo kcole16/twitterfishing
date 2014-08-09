@@ -14,6 +14,7 @@ from finished.models import Item
 from core.models import Account
 from core.forms import AccountForm
 
+
 def home(request):
 	no_items = False
 	try:
