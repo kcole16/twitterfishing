@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="col-md-3">
+    <form method="post" action="{% url 'finished_add_item' %}" role="form">
+
+        <div class="form-group">
+            <label for="id_content">Content: </label>
+            <input class="form-control" id="id_content" type="text" name="content" maxlength="500">
+          </input>
+        </div>
+
+        <div class="row">
+            <div class="col-md-1">
+                <input id="form-submit" class="btn btn-primary btn-submit" type="submit" ></input>
+            </div>
+        </div>
+        {% csrf_token %}
+    </form>
+</div>
+
+{% endblock %}

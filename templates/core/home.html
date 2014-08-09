@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+* {
+    background-color: transparent;
+}
+
+#id_content {
+
+    width: 185px;
+    height: 60px;
+    text-shadow: none;
+    font-size: 30px;
+    padding:0.5em;
+    letter-spacing: 0.05em;
+    margin: 0 0 20px 0;
+    position: relative;
+    display: block;
+    text-transform: none;
+    border-radius: 0;
+    outline:none;
+    -webkit-appearance: none;
+    -webkit-user-select: none;
+    background-color:transparent;
+    border:none;
+    box-shadow: none;
+
+}
+
+input:focus{
+    outline:none;
+    -webkit-appearance: none;
+    -webkit-user-select: none;
+    background:none;
+
+}
+
+#id_item{
+    font-color:black;
+    position: relative;
+}
+</style>
+
+	{% for item in items %}
+    <div id="id_item">
+<!--     	<h1><a id="id_highlight" href='/finished/delete_item/{{item.id}}'>{{ item.content }}</a></h1>
+ -->        <h1>{{ item }}</h1>
+
+    </div>
+    {% endfor %}
+
+    <div class="row">
+    <form class="form-inline" method="post" action="{% url 'finished_add_item' %}" role="form">
+
+    <input class ="form-control" id="id_content" type="text" name="content" maxlength="500" placeholder = "Add Item" autofocus ></input>
+
+        {% csrf_token %}
+    </form>
+</div>
+
+    <div id="yo-button"></div>
+<!-- Enter Yo username -->
+
+{% endblock content %}
+
+{% block extra_javascript %}
+
+$(document).ready(function(){
+    $("#id_item").focus();
+    $("#id_highlight").click(function(e){
+        e.preventDefault();
+        $(this).css('color','red')
+    });
+    $("a").click(function(){
+        $(this).unbind('click')
+    });
+});
+{% endblock %}
+
+
