@@ -14,14 +14,14 @@ from finished.models import Item
 def home(request):
 	no_items = False
 	try:
-		item_queryset=Item.objects.order_by('id')
-		print item_queryset
+		# item_queryset=Item.objects.order_by('id')
+		items = Item.objects.all()
 	except ObjectDoesNotExist:
 		no_items = True
 		return render_to_response('core/home.html',{'items':items, 'no_items':no_items}, context_instance=RequestContext(request))
 	else:
-		items_unordered = [item.content for item in item_queryset]
-		items = items_unordered[-5:]
+		# items_unordered = [item.content for item in item_queryset]
+		# items = items_unordered[-5:]
 		return render_to_response('core/home.html',{'items':items}, context_instance=RequestContext(request))
 
 
