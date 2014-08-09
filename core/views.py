@@ -15,7 +15,7 @@ def home(request):
 	no_items = False
 	try:
 		item_queryset=Item.objects.order_by('id')
-
+		print item_queryset
 	except ObjectDoesNotExist:
 		no_items = True
 		return render_to_response('core/home.html',{'items':items, 'no_items':no_items}, context_instance=RequestContext(request))
