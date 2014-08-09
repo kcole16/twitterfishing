@@ -4,7 +4,7 @@ from django.shortcuts import get_object_or_404, render_to_response, render, redi
 from django.template import RequestContext
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import logout
+from django.contrib.auth import logout, authenticate, login
 from django.db import IntegrityError, connection, transaction
 from django.views.decorators.csrf import csrf_exempt
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -33,9 +33,15 @@ def add_item(request):
 	else:
 		return render_to_response('finished/add_item.html', context_instance=RequestContext(request))
 
-@csrf_exempt
+
 def handle(request, username):
-	print request.GET
+	username = request.GET['username']
+	print username
+	user = Account.objects.get(yo_name=username)
+	login(request, user)
+	url = reverse('home')
+	return HttpResponseRedirect(url) 
+
 
 
 def delete_item(request,item_id):
