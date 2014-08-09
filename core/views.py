@@ -14,7 +14,6 @@ from finished.models import Item
 from core.models import Account
 from core.forms import AccountForm
 
-@login_required
 def home(request):
 	no_items = False
 	try:
@@ -33,7 +32,7 @@ def home(request):
 def logout_view(request):
     logout(request)
     return redirect('login')
-    
+
 
 def create_account(request):
 	if request.POST:

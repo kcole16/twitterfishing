@@ -34,8 +34,8 @@ def add_item(request):
 		return render_to_response('finished/add_item.html', context_instance=RequestContext(request))
 
 
-def handle(request):
-	print request.GET.username
+def handle(request, username):
+	print username
 
 def delete_item(request,item_id):
 	item_to_delete = Item.objects.get(id=item_id)
