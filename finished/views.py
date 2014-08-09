@@ -35,8 +35,7 @@ def add_item(request):
 
 
 def handle(request, username):
-	print username
-	print request.GET['username']
+	print request.GET
 
 
 def delete_item(request,item_id):
