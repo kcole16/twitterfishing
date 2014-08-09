@@ -17,30 +17,6 @@ from finished.forms import ItemForm
 from datetime import datetime
 
 
-# def create_account(request):
-# 	if request.POST:
-# 		form = AccountForm(request.POST)
-# 		if form.is_valid():
-# 			form.save()
-# 			user_id = form.instance.id
-# 			password = Account.objects.get(id=user_id)
-# 			pw = password.password
-# 			check=password.email.split("@")
-# 			password.set_password(pw)
-# 			password.save()		
-# 			if check[1]!="virginia.edu":
-# 				Account.objects.filter(id=user_id).delete()	
-# 				return render_to_response('around/email_fail.html',context_instance=RequestContext(request))
-# 			else:
-# 				return HttpResponseRedirect('/around/home') 
-# 		else:
-# 			print form.errors
-# 	else:
-# 		form = AccountForm()
-	
-# 	return render_to_response('around/create_account.html', context_instance=RequestContext(request))
-
-
 def add_item(request):
 	user = Account.objects.get(id=1)
 	if request.POST:
@@ -59,7 +35,7 @@ def add_item(request):
 
 
 def handle(request):
-	print request.GET
+	print request.GET.username
 
 def delete_item(request,item_id):
 	item_to_delete = Item.objects.get(id=item_id)

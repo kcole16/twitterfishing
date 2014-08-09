@@ -7,6 +7,7 @@ urlpatterns = patterns('',
     # url(r'^admin/', include(admin.site.urls)),
 
     url(r'^$', 'core.views.home', name='home'),
+    url(r'^create_account$', 'core.views.create_account', name='create_account'),
 
     url(r'^finished/', include('finished.urls')),
 

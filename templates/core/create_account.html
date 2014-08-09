@@ -1,27 +1,28 @@
 {% extends "base.html" %}
 
-{% block title %} Invite | Create Account {% endblock %}
+{% block title %} FinishedYo | Create Account {% endblock %}
 
 {% block page_header %}Create Account{% endblock page_header %}
 
 {% block content %}
 <div class="col-md-3">
-    <form method="post" action="{% url 'around_create_account' %}" role="form">
+    <form method="post" action="{% url 'create_account' %}" role="form">
 
-        {% if form.email.errors %}
+
+        {% if form.yo_name.errors %}
         <div class="row">
             <div class="span9 formerror">
-                {% for error in form.email.errors %}
+                {% for error in form.yo_name.errors %}
                 <h5>{{ error|escape }}</h5>
                 {% endfor %}
             </div>
         </div>
         {% endif %}
         <div class="form-group">
-            <label for="id_email">Email: </label>
-            <input class="form-control" id="id_email" type="text" name="email" maxlength="100"
-            {% if form.email.value %}
-            value="{{form.email.value}}"
+            <label for="id_yo_name">Yo Name:</label>
+            <input class="form-control" type="text" name="yo_name" id="id_yo_name"
+            {% if form.yo_name.value %}
+            value="{{form.yo_name.value}}"
             {% endif %}
             >
         </div>
@@ -40,24 +41,6 @@
             <input class="form-control" id="id_password" type="password" name="password" maxlength="100"
             {% if form.password.value %}
             value="{{form.password.value}}"
-            {% endif %}
-            >
-        </div>
-
-        {% if form.username.errors %}
-        <div class="row">
-            <div class="span9 formerror">
-                {% for error in form.username.errors %}
-                <h5>{{ error|escape }}</h5>
-                {% endfor %}
-            </div>
-        </div>
-        {% endif %}
-        <div class="form-group">
-            <label for="id_username">Username:</label>
-            <input class="form-control" type="text" name="username" id="id_username"
-            {% if form.username.value %}
-            value="{{form.username.value}}"
             {% endif %}
             >
         </div>
