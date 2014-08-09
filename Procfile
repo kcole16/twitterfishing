@@ -1,1 +1,1 @@
-web: gunicorn fsite.wsgi:application
+web: python manage.py runserver
