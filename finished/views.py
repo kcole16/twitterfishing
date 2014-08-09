@@ -33,7 +33,7 @@ def add_item(request):
 	else:
 		return render_to_response('finished/add_item.html', context_instance=RequestContext(request))
 
-
+@csrf_exempt
 def handle(request, username):
 	print request.GET
 
