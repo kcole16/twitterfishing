@@ -36,9 +36,9 @@ def add_item(request):
 
 def handle(request, username):
 	username = request.GET['username']
-	print username
 	user = Account.objects.get(yo_name=username)
-	login(request, user)
+	item_to_delete = Item.objects.get(user_id=user.id)[:1]
+	item_to_delete.delete()
 	url = reverse('home')
 	return HttpResponseRedirect(url) 
 
