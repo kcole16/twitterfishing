@@ -8,12 +8,9 @@
 
 #id_content {
 
-    width: 700px;
-    width: 45%;
     height: 100px;
     text-shadow: none;
     font-size: 40px;
-    letter-spacing: 0.05em;
     display: block;
     text-transform: none;
     border-radius: 0;
@@ -54,8 +51,8 @@ input:focus{
 
 	{% for item in items %}
     <div id="id_item" class="center-block">
-    	<h1><a id="id_highlight" class="center-block" href='/finished/delete_item/{{item.id}}'>{{ item.content }}</a></h1>
-    </div></br>
+    	<h1><a id="id_highlight" class="center-block" href='/finished/delete_item/{{item.id}}'>{{ item.content }}</a></h1><br>
+    </div>
     {% endfor %}
 
 <div class="row">
