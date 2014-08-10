@@ -44,7 +44,7 @@ def handle_yoauth(request):
 	username = str(text['user']['yo_username'])
 	user = Account.objects.get(yo_name=username)
 	login(request, user)
-	url = reverse('login')
+	url = reverse('home')
 	return HttpResponseRedirect(url)
 
 
