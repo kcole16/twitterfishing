@@ -58,7 +58,7 @@ li {
 <div class="page">
     <ul style="list-style:none" id="id_item" class="center-block">
        {% for item in items %}
-	   <li id="id_highlight" class="center-block" ><a href='/finished/delete_item/{{item.id}}'>{{ item.content }}</a></li>
+	   <li id="id_highlight" class="center-block" ><a href='/finished/delete_item/{{item.id}}'>{{ item.content }}</a></li></br>
         {% endfor %}
     </ul>
 
