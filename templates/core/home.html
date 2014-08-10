@@ -48,7 +48,7 @@ li {
     list-style-type: none;
 }
 .page {
-    padding-top: 25px;
+    padding-top: 35px;
     width: 50%;
     margin-right: auto;
     margin-left: auto;
@@ -58,7 +58,7 @@ li {
 <div class="page">
     <ul style="list-style:none" id="id_item" class="center-block">
        {% for item in items %}
-	   <li id="id_highlight" class="center-block" ><a href='/finished/delete_item/{{item.id}}'>{{ item.content }}</a></li><br>
+	   <li id="id_highlight" class="center-block" ><a href='/finished/delete_item/{{item.id}}'>{{ item.content }}</a></li>
         {% endfor %}
     </ul>
 
