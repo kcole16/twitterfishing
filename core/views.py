@@ -41,7 +41,7 @@ def handle_yoauth(request):
 	print r.url
 	print r.text
 	text = json.loads(r.text)
-	username = str(text['user']['username'])
+	username = str(text['user']['yo_username'])
 	user = Account.objects.get(yo_name=username)
 	login(request, user)
 	url = reverse('login')
