@@ -39,8 +39,13 @@ def handle_yoauth(request):
 	r = requests.get(url, params=payload)
 	text = json.loads(r.text)
 	username = str(text['user']['yo_username'])
-	user = Account.objects.get(yo_name=username)
-	#user = Account.objects.get(yo_name=username)
+
+	try:
+		user = Account.objects.get(yo_name=username)
+	except ObjectDoesNotExist:
+		user = Account(yo_name=username, password='!')
+		user.save()
+
 	user.backend = 'django.contrib.auth.backends.ModelBackend'
 	login(request, user)
 	url = reverse('home')
