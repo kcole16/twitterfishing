@@ -8,6 +8,7 @@
 
 #id_content {
 
+    width: 45%;
     height: 100px;
     text-shadow: none;
     font-size: 40px;
@@ -34,24 +35,22 @@ input:focus{
 }
 
 #id_item {
-    font-color:black;
+    padding-top: 30px;
+    width: 45%;
     margin-right: auto;
     margin-left: auto;
 }
 
 #id_highlight {
     color: purple;
-    margin-right: auto;
-    margin-left: auto;
     font-size: 40px;
-    width: 45%;
 
 }
 </style>
 
 	{% for item in items %}
     <div id="id_item" class="center-block">
-    	<h1><a id="id_highlight" class="center-block" href='/finished/delete_item/{{item.id}}'>{{ item.content }}</a></h1><br>
+    	<h1><a id="id_highlight" class="center-block" href='/finished/delete_item/{{item.id}}'>{{ item.content }}</a></h1>
     </div>
     {% endfor %}
 
