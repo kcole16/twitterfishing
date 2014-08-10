@@ -4,7 +4,7 @@ from django.shortcuts import get_object_or_404, render_to_response, render, redi
 from django.template import RequestContext
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import logout, login
+from django.contrib.auth import logout, login, authenticate
 from django.db import IntegrityError, connection, transaction
 from django.views.decorators.csrf import csrf_exempt
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -42,7 +42,8 @@ def handle_yoauth(request):
 	print r.text
 	text = json.loads(r.text)
 	username = str(text['user']['yo_username'])
-	user = Account.objects.get(yo_name=username)
+	#user = Account.objects.get(yo_name=username)
+	user = authenticate(username=username, password='!')
 	login(request, user)
 	url = reverse('home')
 	return HttpResponseRedirect(url)
