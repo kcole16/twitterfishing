@@ -44,6 +44,7 @@ def handle_yoauth(request):
 	username = str(text['user']['yo_username'])
 	print username
 	password = Account.objects.get(yo_name=username).password
+	print password
 	#user = Account.objects.get(yo_name=username)
 	user = authenticate(username=username, password=password)
 	login(request, user)
