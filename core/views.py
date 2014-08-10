@@ -36,8 +36,9 @@ def handle_yoauth(request):
 	yoauth_token = request.GET['yoauth_token']
 	print yoauth_token
 	url = 'http://yoauth.herokuapp.com/validate'
-	data = {'yoauth_token':yoauth_token}
-	r = requests.post(url, data=data)
+	payload = {'yoauth_token':yoauth_token}
+	r = requests.get(url, params=payload)
+	print r.url
 	print r.text
 	text = json.loads(r.text)
 	username = str(text['user']['username'])
