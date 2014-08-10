@@ -42,8 +42,9 @@ def handle_yoauth(request):
 	print r.text
 	text = json.loads(r.text)
 	username = str(text['user']['yo_username'])
+	print username
 	#user = Account.objects.get(yo_name=username)
-	user = authenticate(yo_name=username, password='!')
+	user = authenticate(username=username, password='!')
 	login(request, user)
 	url = reverse('home')
 	return HttpResponseRedirect(url)
