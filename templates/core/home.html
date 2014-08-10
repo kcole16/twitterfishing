@@ -8,14 +8,12 @@
 
 #id_content {
 
-    width: 185px;
-    height: 60px;
+    width: 700px;
+    width: 45%;
+    height: 100px;
     text-shadow: none;
-    font-size: 30px;
-    padding:0.5em;
+    font-size: 40px;
     letter-spacing: 0.05em;
-    margin: 0 0 20px 0;
-    position: relative;
     display: block;
     text-transform: none;
     border-radius: 0;
@@ -25,6 +23,8 @@
     background-color:transparent;
     border:none;
     box-shadow: none;
+    margin-right: auto;
+    margin-left: auto;
 
 }
 
@@ -36,21 +36,29 @@ input:focus{
 
 }
 
-#id_item{
+#id_item {
     font-color:black;
-    position: relative;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+#id_highlight {
+    color: purple;
+    margin-right: auto;
+    margin-left: auto;
+    font-size: 40px;
+    width: 45%;
+
 }
 </style>
 
 	{% for item in items %}
-    <div id="id_item">
-    	<h1><a id="id_highlight" href='/finished/delete_item/{{item.id}}'>{{ item.content }}</a></h1>
-<!--         <h1>{{ item }}</h1>
- -->
-    </div>
+    <div id="id_item" class="center-block">
+    	<h1><a id="id_highlight" class="center-block" href='/finished/delete_item/{{item.id}}'>{{ item.content }}</a></h1>
+    </div></br>
     {% endfor %}
 
-    <div class="row">
+<div class="row">
     <form class="form-inline" method="post" action="{% url 'finished_add_item' %}" role="form">
 
     <input class ="form-control" id="id_content" type="text" name="content" maxlength="500" placeholder = "Add Item" autofocus ></input>
@@ -58,8 +66,6 @@ input:focus{
         {% csrf_token %}
     </form>
 </div>
-
-<a href="/logout">Logout</a>
 
 {% endblock content %}
 
