@@ -18,10 +18,10 @@ from datetime import datetime
 
 
 def add_item(request):
-	user = Account.objects.get(id=1)
+	print request.user.id
+	user = Account.objects.get(id=request.user.id)
 	if request.POST:
 		form = ItemForm(request.POST)
-		#user = Account.objects.get(id=request.user.id)
 		form.is_valid()
 		print form.cleaned_data
 		content_to_use = form.cleaned_data['content']
