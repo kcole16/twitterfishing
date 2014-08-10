@@ -34,19 +34,14 @@ def home(request):
 
 def handle_yoauth(request):
 	yoauth_token = request.GET['yoauth_token']
-	print yoauth_token
 	url = 'http://yoauth.herokuapp.com/validate'
 	payload = {'yoauth_token':yoauth_token}
 	r = requests.get(url, params=payload)
-	print r.url
-	print r.text
 	text = json.loads(r.text)
 	username = str(text['user']['yo_username'])
-	print username
-	password = Account.objects.get(yo_name=username).password
-	print password
+	user = Account.objects.get(yo_name=username)
 	#user = Account.objects.get(yo_name=username)
-	user = authenticate(username=username, password=password)
+	user.backend = 'django.contrib.auth.backends.ModelBackend'
 	login(request, user)
 	url = reverse('home')
 	return HttpResponseRedirect(url)
