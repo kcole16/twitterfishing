@@ -10,6 +10,12 @@
 
     <title>Login</title>
 
+   <script src="http://code.jquery.com/jquery-latest.js"></script>
+
+   <script src="http://yoauth.herokuapp.com/js/jquery.yoauth.js"></script>
+
+   <script> YoAuth.callback = function(user) { console.log(user); }; </script>
+
     <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="{{ STATIC_URL }}css/login.css" type="text/css">
 
@@ -19,7 +25,10 @@
 
     <div class="container">
 
-      <form class="form-signin" role="form" action="{% url 'login' %}" method="POST">
+        <a href="#" rel="yoauth" data-redirect-to="http://finishedyo.herokuapp.com/handle_yoauth/">Login with YoAuth</a>
+
+
+<!--       <form class="form-signin" role="form" action="{% url 'login' %}" method="POST">
           <input type="hidden" name="next" value="{{ next }}" />
           {% csrf_token %}
 
@@ -34,7 +43,7 @@
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
       </form>
     </br>
-      <a href="{% url 'create_account' %}"{% if path == '/dashboard/content/'%} class="active"{% endif %} style="margin:320px">Create Account</a>
+      <a href="{% url 'create_account' %}"{% if path == '/dashboard/content/'%} class="active"{% endif %} style="margin:320px">Create Account</a> -->
 
     </div>
   </body>

@@ -14,7 +14,10 @@ from finished.models import Item
 from core.models import Account
 from core.forms import AccountForm
 
+import json
+import requests
 
+@login_required
 def home(request):
 	no_items = False
 	try:
@@ -27,6 +30,19 @@ def home(request):
 		# items_unordered = [item.content for item in item_queryset]
 		# items = items_unordered[-5:]
 		return render_to_response('core/home.html',{'items':items}, context_instance=RequestContext(request))
+
+
+def handle_yoauth(request):
+	yoauth_token = request.GET['yoauth_token']
+	url = 'http://yoauth.herokuapp.com/validate'
+	params = {'yoauth_token':yoauth_token}
+	r = requests.post(url, params=params)
+	text = json.loads(r.text)
+	username = str(text['user']['username'])
+	user = Account.objects.get(yo_name=username)
+	login(request, user)
+	url = reverse('login')
+	return HttpResponseRedirect(url)
 
 
 @login_required

@@ -5,3 +5,4 @@ gunicorn==19.1.0
 wsgiref==0.1.2
 dj-static==0.0.6
 dj-database-url==0.3.0
+requests==2.2.1
