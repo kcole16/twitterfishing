@@ -59,7 +59,7 @@ li {
        {% for item in items %}
 	   <li id="id_highlight"><a href='/finished/delete_item/{{item.id}}'>{{ item.content }}</a></li></br>
         {% endfor %}
-        <li><input class ="form-control" id="id_content" type="text" name="content" maxlength="500" placeholder = "Add Item" autofocus ></input></li>
+        <li><input id="id_content" type="text" name="content" maxlength="500" placeholder = "Add Item" autofocus ></input></li>
     </ul>
 
         {% csrf_token %}
