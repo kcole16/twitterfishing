@@ -31,9 +31,6 @@ input:focus{
 
 }
 
-#id_item {
-
-}
 
 #id_highlight {
     font-size: 40px;
@@ -56,15 +53,15 @@ li {
 </style>
 
 <div class="page">
-    <ul style="list-style:none" id="id_item" class="center-block">
-       {% for item in items %}
-	   <li id="id_highlight" class="center-block" ><a href='/finished/delete_item/{{item.id}}'>{{ item.content }}</a></li></br>
-        {% endfor %}
-    </ul>
 
     <form class="form-inline" method="post" action="{% url 'finished_add_item' %}" role="form">
+    <ul style="list-style:none" id="id_item" class="center-block">
+       {% for item in items %}
+	   <li id="id_highlight"><a href='/finished/delete_item/{{item.id}}'>{{ item.content }}</a></li></br>
+        {% endfor %}
+        <li><input class ="form-control" id="id_content" type="text" name="content" maxlength="500" placeholder = "Add Item" autofocus ></input></li>
+    </ul>
 
-    <input class ="form-control" id="id_content" type="text" name="content" maxlength="500" placeholder = "Add Item" autofocus ></input>
         {% csrf_token %}
     </form>
 </div>
@@ -79,7 +76,7 @@ $(document).ready(function(){
         e.preventDefault();
         $(this).css('color','red')
     });
-    $("li").dblclick(function(){
+    $("li").click(function(){
         $(this).unbind('click')
     });
 });
