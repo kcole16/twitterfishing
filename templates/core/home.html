@@ -35,6 +35,7 @@ input:focus{
 #id_highlight {
     font-size: 40px;
     font-weight: bold;
+    width: 15px;
 }
 
 a {
@@ -44,6 +45,7 @@ a {
 li {
     list-style-type: none;
 }
+
 .page {
     padding-top: 40px;
     width: 40%;
@@ -55,12 +57,17 @@ li {
 <div class="page center-block">
 
     <form class="form-inline" method="post" action="{% url 'finished_add_item' %}" role="form">
-    <ul style="list-style:none" id="id_item" class="center-block">
+    <table style="list-style:none" id="id_item" class="center-block">
        {% for item in items %}
-	   <li id="id_highlight"><a href='/finished/delete_item/{{item.id}}'>{{ item.content }}</a></li><br>
+	   <tr>
+            <td id="id_highlight"><a href='/finished/delete_item/{{item.id}}'>{{ item.content }}</td>
+            <td><h3><time>00:00:00</time></h3></a></td>
+        </tr>
         {% endfor %}
-        <li><input id="id_content" type="text" name="content" maxlength="500" placeholder = "Add Item" autofocus ></input></li>
-    </ul>
+        <tr>
+            <td><input id="id_content" type="text" name="content" maxlength="500" placeholder = "Add Item" autofocus ></input></td>
+        </tr>
+    </table>
 
         {% csrf_token %}
     </form>
@@ -70,16 +77,34 @@ li {
 
 {% block extra_javascript %}
 
-$(document).ready(function(){
-    $("#id_item").focus();
-    $("#id_highlight").click(function(e){
-        e.preventDefault();
-        $(this).css('color','red')
-    });
-    $("li").click(function(){
-        $(this).unbind('click')
-    });
-});
+
+var h3 = document.getElementsByTagName('h3')[0],
+    start = document.getElementById('start'),
+    stop = document.getElementById('stop'),
+    clear = document.getElementById('clear'),
+    seconds = 0, minutes = 0, hours = 0,
+    t;
+
+function add() {
+    seconds++;
+    if (seconds >= 60) {
+        seconds = 0;
+        minutes++;
+        if (minutes >= 60) {
+            minutes = 0;
+            hours++;
+        }
+    }
+    
+    h3.textContent = (hours ? (hours > 9 ? hours : "0" + hours) : "00") + ":" + (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" + (seconds > 9 ? seconds : "0" + seconds);
+
+    timer();
+}
+function timer() {
+    t = setTimeout(add, 1000);
+}
+timer();
+
 {% endblock %}
 
 

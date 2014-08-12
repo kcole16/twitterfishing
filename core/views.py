@@ -17,7 +17,7 @@ from core.forms import AccountForm
 import json
 import requests
 
-@login_required
+# @login_required
 def home(request):
 	no_items = False
 	try:
