@@ -63,9 +63,8 @@ li {
     </ul>
 
     <form class="form-inline" method="post" action="{% url 'finished_add_item' %}" role="form">
-    <ul>
-    <li><input class ="form-control" id="id_content" type="text" name="content" maxlength="500" placeholder = "Add Item" autofocus ></input></li>
-</ul>
+
+    <input class ="form-control" id="id_content" type="text" name="content" maxlength="500" placeholder = "Add Item" autofocus ></input>
         {% csrf_token %}
     </form>
 </div>
@@ -80,7 +79,7 @@ $(document).ready(function(){
         e.preventDefault();
         $(this).css('color','red')
     });
-    $("a").dblclick(function(){
+    $("li").dblclick(function(){
         $(this).unbind('click')
     });
 });
