@@ -46,7 +46,9 @@ li {
 }
 .page {
     padding-top: 35px;
-
+    width: 45%;
+    margin-right: auto;
+    margin-left: auto;
 }
 </style>
 
@@ -55,7 +57,7 @@ li {
     <form class="form-inline" method="post" action="{% url 'finished_add_item' %}" role="form">
     <ul style="list-style:none" id="id_item" class="center-block">
        {% for item in items %}
-	   <li id="id_highlight"><a href='/finished/delete_item/{{item.id}}'>{{ item.content }}</a></li></br>
+	   <li id="id_highlight"><a href='/finished/delete_item/{{item.id}}'>{{ item.content }}</a></li>
         {% endfor %}
         <li><input id="id_content" type="text" name="content" maxlength="500" placeholder = "Add Item" autofocus ></input></li>
     </ul>
