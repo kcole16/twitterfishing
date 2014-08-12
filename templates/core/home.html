@@ -32,7 +32,10 @@ input:focus{
 }
 
 
-
+#id_highlight {
+    font-size: 40px;
+    font-weight: bold;
+}
 
 a {
     color:purple;
@@ -40,8 +43,6 @@ a {
 
 li {
     list-style-type: none;
-    font-size: 40px;
-    font-weight: bold;
 }
 .page {
     padding-top: 35px;
@@ -56,7 +57,7 @@ li {
     <form class="form-inline" method="post" action="{% url 'finished_add_item' %}" role="form">
     <ul style="list-style:none" id="id_item" class="center-block">
        {% for item in items %}
-	   <li><a href='/finished/delete_item/{{item.id}}'>{{ item.content }}</a></li></br>
+	   <li id="id_highlight"><a href='/finished/delete_item/{{item.id}}'>{{ item.content }}</a></li></br>
         {% endfor %}
         <li><input class ="form-control" id="id_content" type="text" name="content" maxlength="500" placeholder = "Add Item" autofocus ></input></li>
     </ul>
