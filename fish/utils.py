@@ -20,7 +20,7 @@ def get_tweets(user):
 def translate_tweet(tweet, target_lang):
 	api = UnbabelApi(username=UNBABEL_USER,api_key=UNBABEL_KEY,sandbox=True)
 	
-	status = api.post_translations(text=str(tweet),target_language=target_lang, callback_url='http://twitterfishing.herokuapp.com/fish/handle_translation')
+	status = api.post_translations(text=str(tweet),target_language=target_lang, callback_url='http://twitterfishing.herokuapp.com/fish/handle_translation/')
 
 	uid = status.uid
 
