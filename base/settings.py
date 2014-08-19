@@ -28,7 +28,7 @@ DEBUG = True
 
 TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = ['twitterfish.herokuapp.com']
+ALLOWED_HOSTS = ['twitterfishing.herokuapp.com']
 
 
 # Application definition
@@ -66,15 +66,15 @@ WSGI_APPLICATION = 'base.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'twitterfish',
+        'NAME': 'twitterfishing',
         'USER': '',
         'PASSWORD': '',
         'HOST': '',
         'PORT': ''
     }
 }
-# import dj_database_url
-# DATABASES['default'] = dj_database_url.config()
+import dj_database_url
+DATABASES['default'] = dj_database_url.config()
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
