@@ -28,9 +28,14 @@ def add_handle(request):
 			target_lang = str(form.cleaned_data['target_language'])
 
 			for tweet in raw_tweets:
-				uid = translate_tweet(str(tweet), target_lang)
-				new_tweet = Tweet(user=user, uid=uid, raw_tweet=str(tweet))
-				new_tweet.save()
+				try:
+					tweet = str(tweet)
+				except UnicodeEncodeError:
+					pass
+				else:
+					uid = translate_tweet(tweet, target_lang)
+					new_tweet = Tweet(user=user, uid=uid, raw_tweet=str(tweet))
+					new_tweet.save()
 			return render_to_response('core/home.html', context_instance=RequestContext(request))
 
 	else:
