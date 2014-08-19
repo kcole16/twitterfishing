@@ -28,7 +28,7 @@ DEBUG = True
 
 TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = ['finishedyo.herokuapp.com']
+ALLOWED_HOSTS = ['twitterfish.herokuapp.com']
 
 
 # Application definition
@@ -44,7 +44,7 @@ INSTALLED_APPS = (
     'south',
 
     'core',
-    'finished'
+    'fish',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -66,15 +66,15 @@ WSGI_APPLICATION = 'base.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'finishedyo',
+        'NAME': 'twitterfish',
         'USER': '',
         'PASSWORD': '',
         'HOST': '',
         'PORT': ''
     }
 }
-import dj_database_url
-DATABASES['default'] = dj_database_url.config()
+# import dj_database_url
+# DATABASES['default'] = dj_database_url.config()
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
@@ -113,4 +113,12 @@ TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'templates'),
 )
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+TWITTER_KEY='E7EkZcp8icFFm04GEErVRlef2'
+TWITTER_SECRET='3ka8meqx3dGFeYstotosEnTZEGtBFrSKUh0L9gN5LzekchHUDb'
+ACCESS_KEY='2327970060-8Y3fWsSwMXYp9IchXB9G5eULRAS2F2dPI6gh2dc'
+ACCESS_SECRET='VYgIBByq4NJlGtCavG8pvex4ktAUJGSga7RI8U61os4EH'
+
+UNBABEL_USER = 'krc5kz'
+UNBABEL_KEY = 'b092c64fc41fcb2fd7273dac436a5575e560e201'
 

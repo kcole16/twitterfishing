@@ -10,49 +10,20 @@ from django.views.decorators.csrf import csrf_exempt
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.urlresolvers import reverse
 
-from finished.models import Item
+from fish.models import Tweet, TwitterHandle
 from core.models import Account
 from core.forms import AccountForm
+from base.settings import *
 
 import json
 import requests
+import twitter
+from unbabel.api import UnbabelApi
 
-# @login_required
 def home(request):
-	no_items = False
-	try:
-		# item_queryset=Item.objects.order_by('id')
-		items = Item.objects.all()
-	except ObjectDoesNotExist:
-		no_items = True
-		return render_to_response('core/home.html',{'items':items, 'no_items':no_items}, context_instance=RequestContext(request))
-	else:
-		# items_unordered = [item.content for item in item_queryset]
-		# items = items_unordered[-5:]
-		return render_to_response('core/home.html',{'items':items}, context_instance=RequestContext(request))
 
+	return render_to_response('core/home.html', context_instance=RequestContext(request))
 
-def handle_yoauth(request):
-	yoauth_token = request.GET['yoauth_token']
-	url = 'http://yoauth.herokuapp.com/validate'
-	payload = {'yoauth_token':yoauth_token}
-	r = requests.get(url, params=payload)
-	text = json.loads(r.text)
-	username = str(text['user']['yo_username'])
-
-	try:
-		user = Account.objects.get(yo_name=username)
-	except ObjectDoesNotExist:
-		user = Account(yo_name=username, password='!')
-		user.save()
-
-	user.backend = 'django.contrib.auth.backends.ModelBackend'
-	login(request, user)
-	url = reverse('home')
-	return HttpResponseRedirect(url)
-
-
-@login_required
 def logout_view(request):
     logout(request)
     return redirect('login')
@@ -75,4 +46,13 @@ def create_account(request):
 		form = AccountForm()
 	
 	return render_to_response('core/create_account.html', context_instance=RequestContext(request))
+
+
+
+
+
+
+
+
+
 

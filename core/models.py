@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 from django.core.validators import RegexValidator
+
 class AccountManager(BaseUserManager):
     def create_user(self, yo_name, password=None):
         if not yo_name:
