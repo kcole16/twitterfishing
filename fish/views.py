@@ -46,17 +46,18 @@ def new_tweet(request):
 
 @csrf_exempt
 def handle_translation(request):
-	user_id = request.user.id
-	uid = request.POST['uid']
-	translated_tweet = request.POST['translatedText']
+	print request.POST
+	# user_id = request.user.id
+	# uid = request.POST['uid']
+	# translated_tweet = request.POST['translatedText']
 
-	send_tweet(user_id, translated_tweet)
+	# send_tweet(user_id, translated_tweet)
 
-	tweet_object = Tweet.objects.get(uid=uid)
-	tweet_object.translated_tweet = translated_tweet
-	tweet_object.save()
-	url = reverse('home')
-	return HttpResponseRedirect(url) 
+	# tweet_object = Tweet.objects.get(uid=uid)
+	# tweet_object.translated_tweet = translated_tweet
+	# tweet_object.save()
+	# url = reverse('home')
+	# return HttpResponseRedirect(url) 
  
 
 
