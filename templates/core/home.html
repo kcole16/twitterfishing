@@ -1,63 +1,14 @@
 {% extends "base.html" %}
+{% block title %}Login{% endblock title %}
+
+{% block body_class %}login{% endblock body_class %}
 
 {% block content %}
-<style>
-* {
-    background-color: transparent;
-}
-
-#id_content {
-
-    height: 100px;
-    text-shadow: none;
-    font-size: 40px;
-    display: block;
-    text-transform: none;
-    border-radius: 0;
-    outline:none;
-    -webkit-appearance: none;
-    -webkit-user-select: none;
-    background-color:transparent;
-    border:none;
-    box-shadow: none;
-
-}
-
-input:focus{
-    outline:none;
-    -webkit-appearance: none;
-    -webkit-user-select: none;
-    background:none;
-
-}
-
-
-#id_highlight {
-    font-size: 40px;
-    font-weight: bold;
-    width: 15px;
-}
-
-a {
-    color:purple;
-}
-
-li {
-    list-style-type: none;
-}
-
-.page {
-    padding-top: 40px;
-    width: 40%;
-    margin-right: auto;
-    margin-left: auto;
-}
-</style>
-
-<div class="page center-block">
-    <a href="{% url 'fish_new_tweet' %}">Send a tweet in another language!</a>
+<div class="pure-g-r">
+    <div class="pure-u-1" style="padding-top:45px;text-align: center; font-size: 150%; margin-top: 2em;">
+        <a href="{% url 'fish_new_tweet' %}"><button class="btn btn-lg btn-twitter"><i class="fa fa-twitter"></i> Translate and Tweet</button></a>
+    </div>
 </div>
-
 {% endblock content %}
 
 

@@ -48,12 +48,9 @@ def new_tweet(request):
 def handle_translation(request):
 
 	uid = request.POST['uid']
-	print uid
 	tweet_object = Tweet.objects.get(uid=uid)
 	user_id = tweet_object.user_id
 	translated_tweet = request.POST['translated_text']
-
-	print translated_tweet
 
 	send_tweet(user_id, translated_tweet)
 
