@@ -1,26 +1,12 @@
 {% extends "base.html" %}
+{% block title %}Login{% endblock title %}
+
+{% block body_class %}login{% endblock body_class %}
 
 {% block content %}
-<style>
-
-#id_button {
-  margin-right: auto;
-  margin-right: auto;
-  background-color: purple;
-  width: 50%;
-  height: 70px;
-  color: white;
-  font-weight: bold;
-  font-size: 30px;
-
-}
-</style>
-    <div style="padding-top:50px" class="container">
-
-        <button id = "id_button" class = 'btn center-block' href="#" rel="yoauth" data-redirect-to="http://finishedyo.herokuapp.com/handle_yoauth/">Login with YoAuth</button>
-
+<div class="pure-g-r">
+    <div class="pure-u-1" style="text-align: center; font-size: 150%; margin-top: 2em;">
+        <a class="pure-button pure-button-primary" href="{% url 'social:begin' "twitter" %}">Login with Twitter</a>
     </div>
-  </body>
-</html>
-
+</div>
 {% endblock content %}

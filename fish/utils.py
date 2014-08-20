@@ -1,3 +1,7 @@
+from django.contrib.auth.models import User
+
+from social.apps.django_app.default.models import *
+
 from base.settings import *
 from unbabel.api import UnbabelApi
 
@@ -25,3 +29,16 @@ def translate_tweet(tweet, target_lang):
 	uid = status.uid
 
 	return uid
+
+	
+def send_tweet(user_id, text):
+	user = User.objects.get(id=user_id)
+	data = UserSocialAuth.objects.get(user_id=user.id).extra_data
+	access_key = data['access_token']['oauth_token']
+	access_secret = data['access_token']['oauth_token_secret']
+
+	api = twitter.Api(consumer_key=TWITTER_KEY,consumer_secret=TWITTER_SECRET,access_token_key=access_key,access_token_secret=access_secret)
+
+	status = api.PostUpdate(text)
+	print status.text
+

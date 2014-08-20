@@ -42,8 +42,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
 
     'south',
-
-    'core',
+    'social.apps.django_app.default',
     'fish',
 )
 
@@ -73,8 +72,8 @@ DATABASES = {
         'PORT': ''
     }
 }
-import dj_database_url
-DATABASES['default'] = dj_database_url.config()
+# import dj_database_url
+# DATABASES['default'] = dj_database_url.config()
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
@@ -88,16 +87,35 @@ USE_L10N = True
 
 USE_TZ = False
 
-AUTH_USER_MODEL = 'core.Account'
-
 # https://docs.djangoproject.com/en/1.6/ref/settings/#std:setting-SESSION_EXPIRE_AT_BROWSER_CLOSE
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
+TEMPLATE_CONTEXT_PROCESSORS = (
+    "social.apps.django_app.context_processors.backends",
+    "social.apps.django_app.context_processors.login_redirect",
+    "django.contrib.auth.context_processors.auth",
+    "django.core.context_processors.debug",
+    "django.core.context_processors.i18n",
+    "django.core.context_processors.media",
+    "django.core.context_processors.static",
+    "django.contrib.messages.context_processors.messages",
+    "django.core.context_processors.request",
+    )
 
 LOGIN_URL = '/login'
 LOGIN_REDIRECT_URL = '/'
+
+AUTHENTICATION_BACKENDS = (
+      'social.backends.twitter.TwitterOAuth',
+      'django.contrib.auth.backends.ModelBackend',
+  )
+
+SOCIAL_AUTH_TWITTER_KEY = 'ebA2YMumyDCDBCoM2mTNmMI4k'
+SOCIAL_AUTH_TWITTER_SECRET = 'SXbwd0CIcLatW69Td82zJsu0BoJ6ykFPEaURiythSgHGXZG5DL'
+SOCIAL_AUTH_DISCONNECT_REDIRECT_URL = '/user/disconnected'
+
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
@@ -114,10 +132,8 @@ TEMPLATE_DIRS = (
 )
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-TWITTER_KEY='E7EkZcp8icFFm04GEErVRlef2'
-TWITTER_SECRET='3ka8meqx3dGFeYstotosEnTZEGtBFrSKUh0L9gN5LzekchHUDb'
-ACCESS_KEY='2327970060-8Y3fWsSwMXYp9IchXB9G5eULRAS2F2dPI6gh2dc'
-ACCESS_SECRET='VYgIBByq4NJlGtCavG8pvex4ktAUJGSga7RI8U61os4EH'
+TWITTER_KEY='ebA2YMumyDCDBCoM2mTNmMI4k'
+TWITTER_SECRET='SXbwd0CIcLatW69Td82zJsu0BoJ6ykFPEaURiythSgHGXZG5DL'
 
 UNBABEL_USER = 'krc5kz'
 UNBABEL_KEY = 'b092c64fc41fcb2fd7273dac436a5575e560e201'

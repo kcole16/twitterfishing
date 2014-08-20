@@ -9,56 +9,55 @@ from django.db import IntegrityError, connection, transaction
 from django.views.decorators.csrf import csrf_exempt
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.urlresolvers import reverse
+from django.contrib.auth.models import User
 
-from core.models import Account
-from fish.models import Tweet, TwitterHandle
-from fish.forms import TwitterForm
+from fish.models import Tweet
+from fish.forms import TweetForm
 from fish.utils import *
 
 from datetime import datetime
 
+@login_required
+def home(request):
 
-def add_handle(request):
+	return render_to_response('core/home.html', context_instance=RequestContext(request))
+
+def logout_view(request):
+    logout(request)
+    return redirect('login')
+
+def new_tweet(request):
+	user = User.objects.get(id=request.user.id)
 	if request.POST:
-		form = TwitterForm(request.POST)
+		form = TweetForm(request.POST)
 		if form.is_valid():
-			user = TwitterHandle(handle=form.cleaned_data['handle'])
-			user.save()
-			raw_tweets = get_tweets(user.handle)
+			raw_tweet = str(form.cleaned_data['tweet'])	
 			target_lang = str(form.cleaned_data['target_language'])
+			uid = translate_tweet(raw_tweet, target_lang)
 
-			for tweet in raw_tweets:
-				try:
-					tweet = str(tweet)
-				except UnicodeEncodeError:
-					pass
-				else:
-					uid = translate_tweet(tweet, target_lang)
-					new_tweet = Tweet(user=user, uid=uid, raw_tweet=str(tweet))
-					new_tweet.save()
+			new_tweet = Tweet(user=user, uid=uid, raw_tweet=raw_tweet)
+			new_tweet.save()
+
 			return render_to_response('core/home.html', context_instance=RequestContext(request))
 
 	else:
-		form = TwitterForm()
-	return render_to_response('fish/add_handle.html',{'form':form}, context_instance=RequestContext(request))
+		form = TweetForm()
+	return render_to_response('fish/new_tweet.html',{'form':form}, context_instance=RequestContext(request))
 
-
+@csrf_exempt
 def handle_translation(request):
-	uid = request.GET['uid']
+	user_id = request.user.id
+	uid = request.POST['uid']
+	translated_tweet = request.POST['translatedText']
+
+	send_tweet(user_id, translated_tweet)
+
 	tweet_object = Tweet.objects.get(uid=uid)
-	tweet_object.translated_tweet = request.GET['translatedText']
+	tweet_object.translated_tweet = translated_tweet
 	tweet_object.save()
 	url = reverse('home')
 	return HttpResponseRedirect(url) 
-
-
-
-# def delete_item(request,item_id):
-# 	item_to_delete = Item.objects.get(id=item_id)
-# 	item_to_delete.delete()
-
-# 	url = reverse('home')
-# 	return HttpResponseRedirect(url) 
+ 
 
 
 
