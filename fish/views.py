@@ -45,10 +45,10 @@ def new_tweet(request):
 		if form.is_valid():
 			raw_tweet = str(form.cleaned_data['tweet'])	
 			target_lang = str(form.cleaned_data['target_language'])
-			# uid = translate_tweet(raw_tweet, target_lang)
+			uid = translate_tweet(raw_tweet, target_lang)
 
-			# new_tweet = Tweet(user=user, uid=uid, raw_tweet=raw_tweet)
-			# new_tweet.save()
+			new_tweet = Tweet(user=user, uid=uid, raw_tweet=raw_tweet)
+			new_tweet.save()
 
 			success = True
 
