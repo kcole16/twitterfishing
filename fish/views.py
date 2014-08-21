@@ -28,21 +28,40 @@ def logout_view(request):
 
 def new_tweet(request):
 	user = User.objects.get(id=request.user.id)
+	languages = (('en', 'English'),
+        ('es', 'Spanish'),
+        ('de', 'German'),
+        ('fr', 'French'),
+        ('ru', 'Russian'),
+        ('ar', 'Arabic'),
+        ('it', 'Italian'),
+        ('pt', 'Portuguese'))
+
+	language_dict = {'en':'English','es':'Spanish','de':'German','fr':'French',
+        			'ru':'Russian','ar':'Arabic','it':'Italian','pt':'Portuguese'}
+
 	if request.POST:
 		form = TweetForm(request.POST)
 		if form.is_valid():
 			raw_tweet = str(form.cleaned_data['tweet'])	
 			target_lang = str(form.cleaned_data['target_language'])
-			uid = translate_tweet(raw_tweet, target_lang)
+			# uid = translate_tweet(raw_tweet, target_lang)
 
-			new_tweet = Tweet(user=user, uid=uid, raw_tweet=raw_tweet)
-			new_tweet.save()
+			# new_tweet = Tweet(user=user, uid=uid, raw_tweet=raw_tweet)
+			# new_tweet.save()
 
-			return render_to_response('core/home.html', context_instance=RequestContext(request))
+			success = True
+
+			tweet_info = {'raw_tweet':raw_tweet, 'target_lang':language_dict[target_lang]}
+
+			return render_to_response('fish/new_tweet.html',{'success':success, 'tweet_info':tweet_info}, context_instance=RequestContext(request))
+
+		else:
+			print form.errors
 
 	else:
 		form = TweetForm()
-	return render_to_response('fish/new_tweet.html',{'form':form}, context_instance=RequestContext(request))
+	return render_to_response('fish/new_tweet.html',{'form':form, 'languages':languages}, context_instance=RequestContext(request))
 
 @csrf_exempt
 def handle_translation(request):
@@ -54,8 +73,11 @@ def handle_translation(request):
 
 	send_tweet(user_id, translated_tweet)
 
-	tweet_object.translated_tweet = translated_tweet
-	tweet_object.save()
+	try:
+		tweet_object.translated_tweet = translated_tweet
+		tweet_object.save()
+	except UnicodeError:
+		pass
 	url = reverse('home')
 	return HttpResponseRedirect(url) 
  
