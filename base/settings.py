@@ -111,9 +111,11 @@ AUTHENTICATION_BACKENDS = (
       'social.backends.twitter.TwitterOAuth',
       'django.contrib.auth.backends.ModelBackend',
   )
+from misc_common.get_keys import init_keys
+MISC_KEYS = init_keys(keyfile=APP_KEYFILE)
 
-SOCIAL_AUTH_TWITTER_KEY = 'ebA2YMumyDCDBCoM2mTNmMI4k'
-SOCIAL_AUTH_TWITTER_SECRET = 'SXbwd0CIcLatW69Td82zJsu0BoJ6ykFPEaURiythSgHGXZG5DL'
+SOCIAL_AUTH_TWITTER_KEY = MISC_KEYS['social_auth_twitter_key']
+SOCIAL_AUTH_TWITTER_SECRET = MISC_KEYS['social_auth_twitter_secret']
 SOCIAL_AUTH_DISCONNECT_REDIRECT_URL = '/user/disconnected'
 
 
@@ -132,9 +134,9 @@ TEMPLATE_DIRS = (
 )
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-TWITTER_KEY='ebA2YMumyDCDBCoM2mTNmMI4k'
-TWITTER_SECRET='SXbwd0CIcLatW69Td82zJsu0BoJ6ykFPEaURiythSgHGXZG5DL'
+TWITTER_KEY = MISC_KEYS['twitter_key']
+TWITTER_SECRET = MISC_KEYS['twitter_secret']
 
 UNBABEL_USER = 'krc5kz'
-UNBABEL_KEY = 'b092c64fc41fcb2fd7273dac436a5575e560e201'
+UNBABEL_KEY = MISC_KEY['unbabel_sandbox_key']
 
