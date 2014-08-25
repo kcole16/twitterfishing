@@ -138,5 +138,5 @@ TWITTER_KEY = MISC_KEYS['twitter_key']
 TWITTER_SECRET = MISC_KEYS['twitter_secret']
 
 UNBABEL_USER = 'krc5kz'
-UNBABEL_KEY = MISC_KEY['unbabel_sandbox_key']
+UNBABEL_KEY = MISC_KEYS['unbabel_sandbox_key']
 
